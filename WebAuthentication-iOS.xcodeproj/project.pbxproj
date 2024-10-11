@@ -6,43 +6,19 @@
 	objectVersion = 77;
 	objects = {
 
-/* Begin PBXContainerItemProxy section */
-		15A96DD12CB9D6BC00887577 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 15A96DB62CB9D6BB00887577 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 15A96DBD2CB9D6BB00887577;
-			remoteInfo = "WebAuthentication-iOS";
-		};
-		15A96DDB2CB9D6BC00887577 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 15A96DB62CB9D6BB00887577 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 15A96DBD2CB9D6BB00887577;
-			remoteInfo = "WebAuthentication-iOS";
-		};
-/* End PBXContainerItemProxy section */
+/* Begin PBXBuildFile section */
+		15A96DEE2CB9D79C00887577 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 15A96DED2CB9D79C00887577 /* README.md */; };
+/* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		15A96DBE2CB9D6BB00887577 /* WebAuthentication-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "WebAuthentication-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		15A96DD02CB9D6BC00887577 /* WebAuthentication-iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "WebAuthentication-iOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		15A96DDA2CB9D6BC00887577 /* WebAuthentication-iOSUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "WebAuthentication-iOSUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		15A96DED2CB9D79C00887577 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		15A96DC02CB9D6BB00887577 /* WebAuthentication-iOS */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = "WebAuthentication-iOS";
-			sourceTree = "<group>";
-		};
-		15A96DD32CB9D6BC00887577 /* WebAuthentication-iOSTests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = "WebAuthentication-iOSTests";
-			sourceTree = "<group>";
-		};
-		15A96DDD2CB9D6BC00887577 /* WebAuthentication-iOSUITests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = "WebAuthentication-iOSUITests";
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -55,29 +31,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		15A96DCD2CB9D6BC00887577 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		15A96DD72CB9D6BC00887577 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		15A96DB52CB9D6BB00887577 = {
 			isa = PBXGroup;
 			children = (
+				15A96DED2CB9D79C00887577 /* README.md */,
 				15A96DC02CB9D6BB00887577 /* WebAuthentication-iOS */,
-				15A96DD32CB9D6BC00887577 /* WebAuthentication-iOSTests */,
-				15A96DDD2CB9D6BC00887577 /* WebAuthentication-iOSUITests */,
 				15A96DBF2CB9D6BB00887577 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -86,8 +47,6 @@
 			isa = PBXGroup;
 			children = (
 				15A96DBE2CB9D6BB00887577 /* WebAuthentication-iOS.app */,
-				15A96DD02CB9D6BC00887577 /* WebAuthentication-iOSTests.xctest */,
-				15A96DDA2CB9D6BC00887577 /* WebAuthentication-iOSUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -117,52 +76,6 @@
 			productReference = 15A96DBE2CB9D6BB00887577 /* WebAuthentication-iOS.app */;
 			productType = "com.apple.product-type.application";
 		};
-		15A96DCF2CB9D6BC00887577 /* WebAuthentication-iOSTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 15A96DE72CB9D6BC00887577 /* Build configuration list for PBXNativeTarget "WebAuthentication-iOSTests" */;
-			buildPhases = (
-				15A96DCC2CB9D6BC00887577 /* Sources */,
-				15A96DCD2CB9D6BC00887577 /* Frameworks */,
-				15A96DCE2CB9D6BC00887577 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				15A96DD22CB9D6BC00887577 /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				15A96DD32CB9D6BC00887577 /* WebAuthentication-iOSTests */,
-			);
-			name = "WebAuthentication-iOSTests";
-			packageProductDependencies = (
-			);
-			productName = "WebAuthentication-iOSTests";
-			productReference = 15A96DD02CB9D6BC00887577 /* WebAuthentication-iOSTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		15A96DD92CB9D6BC00887577 /* WebAuthentication-iOSUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 15A96DEA2CB9D6BC00887577 /* Build configuration list for PBXNativeTarget "WebAuthentication-iOSUITests" */;
-			buildPhases = (
-				15A96DD62CB9D6BC00887577 /* Sources */,
-				15A96DD72CB9D6BC00887577 /* Frameworks */,
-				15A96DD82CB9D6BC00887577 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				15A96DDC2CB9D6BC00887577 /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				15A96DDD2CB9D6BC00887577 /* WebAuthentication-iOSUITests */,
-			);
-			name = "WebAuthentication-iOSUITests";
-			packageProductDependencies = (
-			);
-			productName = "WebAuthentication-iOSUITests";
-			productReference = 15A96DDA2CB9D6BC00887577 /* WebAuthentication-iOSUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -175,14 +88,6 @@
 				TargetAttributes = {
 					15A96DBD2CB9D6BB00887577 = {
 						CreatedOnToolsVersion = 16.0;
-					};
-					15A96DCF2CB9D6BC00887577 = {
-						CreatedOnToolsVersion = 16.0;
-						TestTargetID = 15A96DBD2CB9D6BB00887577;
-					};
-					15A96DD92CB9D6BC00887577 = {
-						CreatedOnToolsVersion = 16.0;
-						TestTargetID = 15A96DBD2CB9D6BB00887577;
 					};
 				};
 			};
@@ -201,8 +106,6 @@
 			projectRoot = "";
 			targets = (
 				15A96DBD2CB9D6BB00887577 /* WebAuthentication-iOS */,
-				15A96DCF2CB9D6BC00887577 /* WebAuthentication-iOSTests */,
-				15A96DD92CB9D6BC00887577 /* WebAuthentication-iOSUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -212,20 +115,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		15A96DCE2CB9D6BC00887577 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		15A96DD82CB9D6BC00887577 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+				15A96DEE2CB9D79C00887577 /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -239,34 +129,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		15A96DCC2CB9D6BC00887577 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		15A96DD62CB9D6BC00887577 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		15A96DD22CB9D6BC00887577 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 15A96DBD2CB9D6BB00887577 /* WebAuthentication-iOS */;
-			targetProxy = 15A96DD12CB9D6BC00887577 /* PBXContainerItemProxy */;
-		};
-		15A96DDC2CB9D6BC00887577 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 15A96DBD2CB9D6BB00887577 /* WebAuthentication-iOS */;
-			targetProxy = 15A96DDB2CB9D6BC00887577 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		15A96DE22CB9D6BC00887577 /* Debug */ = {
@@ -393,9 +256,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"WebAuthentication-iOS/Preview Content\"";
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = MDE3YTL7P4;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -410,6 +276,8 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.cretivegames.webauthentication.WebAuthentication-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "Generic AppID - Development";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -421,9 +289,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"WebAuthentication-iOS/Preview Content\"";
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = MDE3YTL7P4;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -438,77 +309,11 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.cretivegames.webauthentication.WebAuthentication-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "Generic AppID - Development";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
-		15A96DE82CB9D6BC00887577 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.cretivegames.webauthentication.WebAuthentication-iOSTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WebAuthentication-iOS.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/WebAuthentication-iOS";
-			};
-			name = Debug;
-		};
-		15A96DE92CB9D6BC00887577 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.cretivegames.webauthentication.WebAuthentication-iOSTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WebAuthentication-iOS.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/WebAuthentication-iOS";
-			};
-			name = Release;
-		};
-		15A96DEB2CB9D6BC00887577 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.cretivegames.webauthentication.WebAuthentication-iOSUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = "WebAuthentication-iOS";
-			};
-			name = Debug;
-		};
-		15A96DEC2CB9D6BC00887577 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.cretivegames.webauthentication.WebAuthentication-iOSUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = "WebAuthentication-iOS";
 			};
 			name = Release;
 		};
@@ -529,24 +334,6 @@
 			buildConfigurations = (
 				15A96DE52CB9D6BC00887577 /* Debug */,
 				15A96DE62CB9D6BC00887577 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		15A96DE72CB9D6BC00887577 /* Build configuration list for PBXNativeTarget "WebAuthentication-iOSTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				15A96DE82CB9D6BC00887577 /* Debug */,
-				15A96DE92CB9D6BC00887577 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		15A96DEA2CB9D6BC00887577 /* Build configuration list for PBXNativeTarget "WebAuthentication-iOSUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				15A96DEB2CB9D6BC00887577 /* Debug */,
-				15A96DEC2CB9D6BC00887577 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

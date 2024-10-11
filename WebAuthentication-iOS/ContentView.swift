@@ -6,56 +6,48 @@
 //
 
 import SwiftUI
-import SwiftData
+import AuthenticationServices
 
 struct ContentView: View {
-    @Environment(\.modelContext) private var modelContext
-    @Query private var items: [Item]
+    // Get an instance of WebAuthenticationSession using SwiftUI's
+    // @Environment property wrapper.
+    @Environment(\.webAuthenticationSession) private var webAuthenticationSession
 
     var body: some View {
-        NavigationSplitView {
-            List {
-                ForEach(items) { item in
-                    NavigationLink {
-                        Text("Item at \(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))")
-                    } label: {
-                        Text(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))
-                    }
+        Button("Sign in") {
+            Task {
+                do {
+                    // Perform the authentication and await the result.
+                    // https://developers.google.com/identity/protocols/oauth2/native-app#ios_1
+                    let authorizationEndpoint = "https://accounts.google.com/o/oauth2/v2/auth"
+                    let clientId = "536177625423-etu4d72tjl4ej68qgpc6k02mfe97vlvi.apps.googleusercontent.com"
+                    let redirectScheme = "com.googleusercontent.apps.536177625423-etu4d72tjl4ej68qgpc6k02mfe97vlvi"
+                    let redirectUri = "com.googleusercontent.apps.536177625423-etu4d72tjl4ej68qgpc6k02mfe97vlvi"
+                    let authorizationScope = "profile"
+                    let authURL = "\(authorizationEndpoint)?scope=\(authorizationScope)&response_type=code&client_id=\(clientId)&redirect_uri=\(redirectUri)"
+
+                    let urlWithToken = try await webAuthenticationSession.authenticate(
+                        using: URL(string: authURL)!,
+                        callbackURLScheme: redirectScheme,
+                        preferredBrowserSession: .ephemeral
+                    )
+                    // Call the method that completes the authentication using the
+                    // returned URL.
+                    try await signIn(using: urlWithToken)
+                } catch {
+                    // Respond to any authorization errors.
                 }
-                .onDelete(perform: deleteItems)
             }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
-                }
-                ToolbarItem {
-                    Button(action: addItem) {
-                        Label("Add Item", systemImage: "plus")
-                    }
-                }
-            }
-        } detail: {
-            Text("Select an item")
         }
     }
 
-    private func addItem() {
-        withAnimation {
-            let newItem = Item(timestamp: Date())
-            modelContext.insert(newItem)
-        }
-    }
-
-    private func deleteItems(offsets: IndexSet) {
-        withAnimation {
-            for index in offsets {
-                modelContext.delete(items[index])
-            }
-        }
+    private func signIn(using urlWithToken: URL) async throws {
+//        let queryItems = URLComponents(string: urlWithToken.absoluteString)?.queryItems
+//        let token = queryItems?.filter({ $0.name == "token" }).first?.value
+        print(urlWithToken)
     }
 }
 
 #Preview {
     ContentView()
-        .modelContainer(for: Item.self, inMemory: true)
 }
