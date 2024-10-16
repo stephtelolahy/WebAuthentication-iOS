@@ -35,12 +35,23 @@ public struct OAuth2PKCEAuthenticator {
         let codeChallenge = codeChallenge(for: codeVerifier)
 
         // 3. redirects the user to the authorization server along with the code_challenge
-        let authUrl = "\(parameters.authorizationEndpoint)?response_type=code&scope=openid%20profile&code_challenge=\(codeChallenge)&code_challenge_method=S256&client_id=\(parameters.clientId)&redirect_uri=\(parameters.redirectUri)"
+        var components = URLComponents(url: URL(string: parameters.authorizationEndpoint)!, resolvingAgainstBaseURL: true)!
+        components.queryItems = [
+            URLQueryItem(name: "response_type", value: "code"),
+            URLQueryItem(name: "scope", value: "openid profile"),
+            URLQueryItem(name: "code_challenge", value: codeChallenge),
+            URLQueryItem(name: "code_challenge_method", value: "S256"),
+            URLQueryItem(name: "client_id", value: parameters.clientId),
+            URLQueryItem(name: "redirect_uri", value: parameters.redirectUri),
+        ]
+        let authUrl = components.url!
+
         let responseUrl = try await webAuthenticationSession.authenticate(
-            using: URL(string: authUrl)!,
+            using: authUrl,
             callbackURLScheme: parameters.callbackURLScheme,
             preferredBrowserSession: .ephemeral
         )
+
         // authorization server stores the code_challenge and redirects the user back to the application with an authorization code, which is good for one use
         let code = responseUrl.getQueryStringParameter("code")!
 
