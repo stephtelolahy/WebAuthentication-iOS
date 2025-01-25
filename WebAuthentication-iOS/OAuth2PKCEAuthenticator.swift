@@ -63,6 +63,50 @@ public struct OAuth2PKCEAuthenticator {
         )
         return accessTokenResponse
     }
+
+    public func authenticateWithAdditionalParameters(
+        parameters: OAuth2PKCEParameters,
+        webAuthenticationSession: WebAuthenticationSession
+    ) async throws -> AccessTokenResponse {
+        // 1. creates a cryptographically-random code_verifier
+        let codeVerifier = createCodeVerifier()
+
+        // 2. and from this generates a code_challenge
+        let codeChallenge = codeChallenge(for: codeVerifier)
+
+        // 3. redirects the user to the authorization server along with the code_challenge
+        var components = URLComponents(url: URL(string: parameters.authorizationEndpoint)!, resolvingAgainstBaseURL: true)!
+        components.queryItems = [
+            URLQueryItem(name: "response_type", value: "code"),
+            URLQueryItem(name: "scope", value: "openid profile"),
+            URLQueryItem(name: "code_challenge", value: codeChallenge),
+            URLQueryItem(name: "code_challenge_method", value: "S256"),
+            URLQueryItem(name: "client_id", value: parameters.clientId),
+            URLQueryItem(name: "redirect_uri", value: parameters.redirectUri),
+        ]
+        let authUrl = components.url!
+
+        let responseUrl = try await webAuthenticationSession.authenticate(
+            using: authUrl,
+            callback: .customScheme(parameters.callbackURLScheme),
+            preferredBrowserSession: .ephemeral,
+            additionalHeaderFields: [
+                "locale": "fr",
+                "apiKey": "AIzaSyDaGmWKa4JsXZ-HjGw7ISLn_3namBGewQe"
+            ]
+        )
+
+        // authorization server stores the code_challenge and redirects the user back to the application with an authorization code, which is good for one use
+        let code = responseUrl.getQueryStringParameter("code")!
+
+        // 4. sends this code and the code_verifier (created in step 2) to the authorization server (token endpoint)
+        let accessTokenResponse = try await getAccessToken(
+            authCode: code,
+            codeVerifier: codeVerifier,
+            parameters: parameters
+        )
+        return accessTokenResponse
+    }
 }
 
 private extension OAuth2PKCEAuthenticator {

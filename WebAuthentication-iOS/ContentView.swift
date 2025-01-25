@@ -28,7 +28,7 @@ struct ContentView: View {
                                 callbackURLScheme: "com.googleusercontent.apps.536177625423-pgg73j72t5rm2cotakfn6erj8979ioep"
                             )
                             // Perform the authentication and await the result.
-                            let response = try await OAuth2PKCEAuthenticator().authenticate(
+                            let response = try await OAuth2PKCEAuthenticator().authenticateWithAdditionalParameters(
                                 parameters: parameters,
                                 webAuthenticationSession: webAuthenticationSession
                             )
