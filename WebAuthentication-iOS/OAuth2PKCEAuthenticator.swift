@@ -48,8 +48,12 @@ public struct OAuth2PKCEAuthenticator {
 
         let responseUrl = try await webAuthenticationSession.authenticate(
             using: authUrl,
-            callbackURLScheme: parameters.callbackURLScheme,
-            preferredBrowserSession: .ephemeral
+            callback: .customScheme(parameters.callbackURLScheme),
+            preferredBrowserSession: .ephemeral,
+            additionalHeaderFields: [
+                "locale": "fr",
+                "apiKey": "AIzaSyDaGmWKa4JsXZ-HjGw7ISLn_3namBGewQe"
+            ]
         )
 
         // authorization server stores the code_challenge and redirects the user back to the application with an authorization code, which is good for one use
@@ -69,7 +73,7 @@ private extension OAuth2PKCEAuthenticator {
     func createCodeVerifier() -> String {
         var buffer = [UInt8](repeating: 0, count: 32)
         _ = SecRandomCopyBytes(kSecRandomDefault, buffer.count, &buffer)
-        return Data(bytes: buffer)
+        return Data(buffer)
             .base64EncodedString()
             .replacingOccurrences(of: "+", with: "-")
             .replacingOccurrences(of: "/", with: "_")
@@ -85,7 +89,7 @@ private extension OAuth2PKCEAuthenticator {
         data.withUnsafeBytes {
             _ = CC_SHA256($0, CC_LONG(data.count), &buffer)
         }
-        let hash = Data(bytes: buffer)
+        let hash = Data(buffer)
         return hash.base64EncodedString()
             .replacingOccurrences(of: "+", with: "-")
             .replacingOccurrences(of: "/", with: "_")
