@@ -92,11 +92,11 @@
 				};
 			};
 			buildConfigurationList = 15A96DB92CB9D6BB00887577 /* Build configuration list for PBXProject "WebAuthentication-iOS" */;
-			developmentRegion = en;
+			developmentRegion = fr;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				en,
 				Base,
+				fr,
 			);
 			mainGroup = 15A96DB52CB9D6BB00887577;
 			minimizedProjectReferenceProxies = 1;

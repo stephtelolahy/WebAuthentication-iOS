@@ -10,11 +10,13 @@ import AuthenticationServices
 
 struct ContentView: View {
     @Environment(\.webAuthenticationSession) private var webAuthenticationSession
-    @State private var accessToken = ""
+    @State private var accessToken: String?
 
     var body: some View {
         VStack {
-            if accessToken.isEmpty {
+            if let accessToken {
+                Text("Authenticated: \(accessToken)")
+            } else {
                 Button("Sign in") {
                     Task {
                         do {
@@ -37,8 +39,6 @@ struct ContentView: View {
                         }
                     }
                 }
-            } else {
-                Text("Authenticated: \(accessToken)")
             }
         }
     }
