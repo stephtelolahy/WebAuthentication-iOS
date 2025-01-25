@@ -38,7 +38,7 @@ struct ContentView: View {
                     }
                 }
             } else {
-                Text(accessToken)
+                Text("Authenticated: \(accessToken)")
             }
         }
     }
