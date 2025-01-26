@@ -11,6 +11,12 @@ import AuthenticationServices
 struct ContentView: View {
     @Environment(\.webAuthenticationSession) private var webAuthenticationSession
     @State private var accessToken: String?
+    @State private var occurredError: OAuthError?
+
+    struct OAuthError: Identifiable {
+        var id: String = UUID().uuidString
+        let underlying: Error
+    }
 
     private var googleOAuthParameters: OAuth2PKCEParameters {
         .init(
@@ -51,11 +57,18 @@ struct ContentView: View {
                             )
                             accessToken = String(describing: response)
                         } catch {
-                            print(error)
+                            occurredError = .init(underlying: error)
                         }
                     }
                 }
             }
+        }
+        .alert(item: $occurredError) { error in
+            Alert(
+                title: Text("Error"),
+                message: Text(String(describing: error.underlying)),
+                dismissButton: .cancel()
+            )
         }
     }
 }
