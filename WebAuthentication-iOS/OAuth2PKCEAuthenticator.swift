@@ -82,8 +82,9 @@ private extension OAuth2PKCEAuthenticator {
     }
 
     func codeChallenge(for verifier: String) -> String {
-        // Dependency: Apple Common Crypto library
-        // http://opensource.apple.com//source/CommonCrypto
+        // generates the code_challenge per spec https://tools.ietf.org/html/rfc7636#section-4.2
+        // code_challenge = BASE64URL-ENCODE(SHA256(ASCII(code_verifier)))
+        // NB. the ASCII conversion on the code_verifier entropy was done at time of generation.
         guard let data = verifier.data(using: .utf8) else { fatalError() }
         var buffer = [UInt8](repeating: 0,  count: Int(CC_SHA256_DIGEST_LENGTH))
         data.withUnsafeBytes {
