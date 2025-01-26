@@ -16,6 +16,7 @@ public struct OAuth2PKCEParameters {
     public var clientId: String
     public var redirectUri: String
     public var callbackURLScheme: String
+    public var additionalHeaders: [String: String]
 }
 
 public struct AccessTokenResponse: Codable {
@@ -45,19 +46,20 @@ public struct OAuth2PKCEAuthenticator {
             URLQueryItem(name: "redirect_uri", value: parameters.redirectUri),
         ]
         let authUrl = components.url!
+        print("authUrl: \(authUrl)")
 
         let responseUrl = try await webAuthenticationSession.authenticate(
             using: authUrl,
             callback: .customScheme(parameters.callbackURLScheme),
             preferredBrowserSession: .ephemeral,
-            additionalHeaderFields: [
-                "locale": "fr",
-                "apiKey": "AIzaSyDaGmWKa4JsXZ-HjGw7ISLn_3namBGewQe"
-            ]
+            additionalHeaderFields: parameters.additionalHeaders
         )
+        print("responseUrl: \(responseUrl)")
 
         // authorization server stores the code_challenge and redirects the user back to the application with an authorization code, which is good for one use
-        let code = responseUrl.getQueryStringParameter("code")!
+        guard let code = responseUrl.getQueryStringParameter("code") else {
+            throw OAuth2PKCEAuthenticatorError.missingAuthorizationCode
+        }
 
         // 4. sends this code and the code_verifier (created in step 2) to the authorization server (token endpoint)
         let accessTokenResponse = try await getAccessToken(
@@ -136,4 +138,8 @@ private extension URLRequest {
         ) as Data
         return request as URLRequest
     }
+}
+
+enum OAuth2PKCEAuthenticatorError: Error {
+    case missingAuthorizationCode
 }
