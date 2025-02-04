@@ -14,36 +14,6 @@ struct ContentView: View {
     @State private var occurredError: OAuthError?
     @State var showSafari = false
 
-    struct OAuthError: Identifiable {
-        var id: String = UUID().uuidString
-        let underlying: Error
-    }
-
-    private var googleOAuthParameters: OAuth2PKCEParameters {
-        .init(
-            authorizationEndpoint: "https://accounts.google.com/o/oauth2/v2/auth",
-            tokenEndpoint: "https://oauth2.googleapis.com/token",
-            clientId: "536177625423-pgg73j72t5rm2cotakfn6erj8979ioep.apps.googleusercontent.com",
-            redirectUri: "com.googleusercontent.apps.536177625423-pgg73j72t5rm2cotakfn6erj8979ioep:/oauth2redirect/example-provider",
-            callbackURLScheme: "com.googleusercontent.apps.536177625423-pgg73j72t5rm2cotakfn6erj8979ioep",
-            additionalHeaders: [
-                "locale": "fr",
-                "apiKey": "AIzaSyDaGmWKa4JsXZ-HjGw7ISLn_3namBGewQe"
-            ]
-        )
-    }
-
-    private var localhostOAuthParameters: OAuth2PKCEParameters {
-        .init(
-            authorizationEndpoint: "http://localhost:8888/index.html",
-            tokenEndpoint: "http://localhost:8888/token",
-            clientId: "1",
-            redirectUri: "myapp://oauth2redirect",
-            callbackURLScheme: "myapp",
-            additionalHeaders: [:]
-        )
-    }
-
     var body: some View {
         VStack(spacing: 20) {
 
@@ -51,7 +21,7 @@ struct ContentView: View {
                 Task {
                     do {
                         let response = try await OAuth2PKCEAuthenticator().authenticate(
-                            parameters: googleOAuthParameters,
+                            parameters: .googleOAuthParameters,
                             webAuthenticationSession: webAuthenticationSession
                         )
                         accessToken = String(describing: response)
@@ -85,4 +55,36 @@ struct ContentView: View {
 
 #Preview {
     ContentView()
+}
+
+private extension OAuth2PKCEParameters {
+    static var googleOAuthParameters: Self {
+        .init(
+            authorizationEndpoint: "https://accounts.google.com/o/oauth2/v2/auth",
+            tokenEndpoint: "https://oauth2.googleapis.com/token",
+            clientId: "536177625423-pgg73j72t5rm2cotakfn6erj8979ioep.apps.googleusercontent.com",
+            redirectUri: "com.googleusercontent.apps.536177625423-pgg73j72t5rm2cotakfn6erj8979ioep:/oauth2redirect/example-provider",
+            callbackURLScheme: "com.googleusercontent.apps.536177625423-pgg73j72t5rm2cotakfn6erj8979ioep",
+            additionalHeaders: [
+                "locale": "fr",
+                "apiKey": "AIzaSyDaGmWKa4JsXZ-HjGw7ISLn_3namBGewQe"
+            ]
+        )
+    }
+
+    static var localhostOAuthParameters: Self {
+        .init(
+            authorizationEndpoint: "http://localhost:8888/index.html",
+            tokenEndpoint: "http://localhost:8888/token",
+            clientId: "1",
+            redirectUri: "myapp://oauth2redirect",
+            callbackURLScheme: "myapp",
+            additionalHeaders: [:]
+        )
+    }
+}
+
+struct OAuthError: Identifiable {
+    var id: String = UUID().uuidString
+    let underlying: Error
 }
