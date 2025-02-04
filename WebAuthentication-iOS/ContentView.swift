@@ -12,6 +12,7 @@ struct ContentView: View {
     @Environment(\.webAuthenticationSession) private var webAuthenticationSession
     @State private var accessToken: String?
     @State private var occurredError: OAuthError?
+    @State var showSafari = false
 
     struct OAuthError: Identifiable {
         var id: String = UUID().uuidString
@@ -44,24 +45,30 @@ struct ContentView: View {
     }
 
     var body: some View {
-        VStack {
-            if let accessToken {
-                Text("Authenticated: \(accessToken)")
-            } else {
-                Button("Sign in") {
-                    Task {
-                        do {
-                            let response = try await OAuth2PKCEAuthenticator().authenticate(
-                                parameters: localhostOAuthParameters,
-                                webAuthenticationSession: webAuthenticationSession
-                            )
-                            accessToken = String(describing: response)
-                        } catch {
-                            occurredError = .init(underlying: error)
-                        }
+        VStack(spacing: 20) {
+
+            Button("Sign in with WebAuthenticationSession") {
+                Task {
+                    do {
+                        let response = try await OAuth2PKCEAuthenticator().authenticate(
+                            parameters: googleOAuthParameters,
+                            webAuthenticationSession: webAuthenticationSession
+                        )
+                        accessToken = String(describing: response)
+                    } catch {
+                        occurredError = .init(underlying: error)
                     }
                 }
             }
+
+            Button("Sign in with Safari") {
+                showSafari.toggle()
+            }
+
+            if let accessToken {
+                Text("Authenticated: \(accessToken)")
+            }
+
         }
         .alert(item: $occurredError) { error in
             Alert(
@@ -69,6 +76,9 @@ struct ContentView: View {
                 message: Text(String(describing: error.underlying)),
                 dismissButton: .cancel()
             )
+        }
+        .sheet(isPresented: $showSafari) {
+            SafariView(url: URL(string: "https://accounts.google.com")!)
         }
     }
 }
