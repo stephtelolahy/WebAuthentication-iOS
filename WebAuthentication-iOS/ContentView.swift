@@ -31,7 +31,7 @@ struct ContentView: View {
                 }
             }
 
-            Button("Sign in with Safari") {
+            Button("Sign in with SFSafariViewController") {
                 showSafari.toggle()
             }
 

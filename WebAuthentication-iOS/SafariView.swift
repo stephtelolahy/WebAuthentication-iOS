@@ -16,10 +16,9 @@ struct SafariView: UIViewControllerRepresentable {
         config.entersReaderIfAvailable = false // Disable reader mode
 
         let safariVC = SFSafariViewController(url: url, configuration: config)
-        safariVC.preferredBarTintColor = .white         // Navigation bar background color
-        safariVC.preferredControlTintColor = .red     // Tint color for buttons
+        safariVC.preferredControlTintColor = .systemRed     // Tint color for buttons
         safariVC.delegate = context.coordinator         // Handle dismissal events
-        safariVC.dismissButtonStyle = .close
+        safariVC.dismissButtonStyle = .cancel
         return safariVC
     }
 
@@ -41,6 +40,10 @@ struct SafariView: UIViewControllerRepresentable {
         func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
             // Handle when the user dismisses SafariViewController
             print("SafariViewController dismissed.")
+        }
+
+        func safariViewController(_ controller: SFSafariViewController, activityItemsFor URL: URL, title: String?) -> [UIActivity] {
+            []
         }
     }
 }
