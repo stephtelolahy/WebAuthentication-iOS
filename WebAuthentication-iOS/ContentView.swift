@@ -12,13 +12,53 @@ struct ContentView: View {
     @Environment(\.webAuthenticationSession) private var webAuthenticationSession
     @State private var accessToken: String?
     @State private var occurredError: OAuthError?
+    @State var showSafari = false
 
-    struct OAuthError: Identifiable {
-        var id: String = UUID().uuidString
-        let underlying: Error
+    var body: some View {
+        VStack(spacing: 20) {
+
+            Button("Sign in with WebAuthenticationSession") {
+                Task {
+                    do {
+                        let response = try await OAuth2PKCEAuthenticator().authenticate(
+                            parameters: .googleOAuthParameters,
+                            webAuthenticationSession: webAuthenticationSession
+                        )
+                        accessToken = String(describing: response)
+                    } catch {
+                        occurredError = .init(underlying: error)
+                    }
+                }
+            }
+
+            Button("Sign in with SFSafariViewController") {
+                showSafari.toggle()
+            }
+
+            if let accessToken {
+                Text("Authenticated: \(accessToken)")
+            }
+
+        }
+        .alert(item: $occurredError) { error in
+            Alert(
+                title: Text("Error"),
+                message: Text(String(describing: error.underlying)),
+                dismissButton: .cancel()
+            )
+        }
+        .sheet(isPresented: $showSafari) {
+            SafariView(url: URL(string: "https://accounts.google.com")!)
+        }
     }
+}
 
-    private var googleOAuthParameters: OAuth2PKCEParameters {
+#Preview {
+    ContentView()
+}
+
+private extension OAuth2PKCEParameters {
+    static var googleOAuthParameters: Self {
         .init(
             authorizationEndpoint: "https://accounts.google.com/o/oauth2/v2/auth",
             tokenEndpoint: "https://oauth2.googleapis.com/token",
@@ -32,7 +72,7 @@ struct ContentView: View {
         )
     }
 
-    private var localhostOAuthParameters: OAuth2PKCEParameters {
+    static var localhostOAuthParameters: Self {
         .init(
             authorizationEndpoint: "http://localhost:8888/index.html",
             tokenEndpoint: "http://localhost:8888/token",
@@ -42,37 +82,9 @@ struct ContentView: View {
             additionalHeaders: [:]
         )
     }
-
-    var body: some View {
-        VStack {
-            if let accessToken {
-                Text("Authenticated: \(accessToken)")
-            } else {
-                Button("Sign in") {
-                    Task {
-                        do {
-                            let response = try await OAuth2PKCEAuthenticator().authenticate(
-                                parameters: localhostOAuthParameters,
-                                webAuthenticationSession: webAuthenticationSession
-                            )
-                            accessToken = String(describing: response)
-                        } catch {
-                            occurredError = .init(underlying: error)
-                        }
-                    }
-                }
-            }
-        }
-        .alert(item: $occurredError) { error in
-            Alert(
-                title: Text("Error"),
-                message: Text(String(describing: error.underlying)),
-                dismissButton: .cancel()
-            )
-        }
-    }
 }
 
-#Preview {
-    ContentView()
+struct OAuthError: Identifiable {
+    var id: String = UUID().uuidString
+    let underlying: Error
 }
