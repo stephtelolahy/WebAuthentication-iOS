@@ -25,8 +25,15 @@ struct ContentView: View {
                             webAuthenticationSession: webAuthenticationSession
                         )
                         accessToken = String(describing: response)
+                    } catch let sessionError as ASWebAuthenticationSessionError {
+                        switch sessionError.code {
+                        case .canceledLogin:
+                            occurredError = .init(message: "User cancelled")
+                        default:
+                            occurredError = .init(message: "Unknown")
+                        }
                     } catch {
-                        occurredError = .init(underlying: error)
+                        occurredError = .init(message: String(describing: error))
                     }
                 }
             }
@@ -43,7 +50,7 @@ struct ContentView: View {
         .alert(item: $occurredError) { error in
             Alert(
                 title: Text("Error"),
-                message: Text(String(describing: error.underlying)),
+                message: Text(error.message),
                 dismissButton: .cancel()
             )
         }
@@ -86,5 +93,5 @@ private extension OAuth2PKCEParameters {
 
 struct OAuthError: Identifiable {
     var id: String = UUID().uuidString
-    let underlying: Error
+    let message: String
 }
